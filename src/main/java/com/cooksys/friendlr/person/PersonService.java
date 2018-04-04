@@ -64,25 +64,15 @@ public class PersonService {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else  {
 			try {
-				Set<Person> set = new HashSet<Person>(personz);
-
-				if(set.size() < personz.size()) {
-					person.setFirstName(person.getFirstName());
-					person.setLastName(person.getLastName());
-					person.setFriends(personz);
-					person.setId((long) set.size());
-					personz.add(person);
-					
-					return new ResponseEntity<PersonDto>(mapper.toDto(person), HttpStatus.CREATED);
-				} else {
-					person.setFirstName(person.getFirstName());
-					person.setLastName(person.getLastName());
-					person.setFriends(personz);
-					person.setId(person.getId()); 
-					personz.add(person);
+				
+				person.setFirstName(person.getFirstName());
+				person.setLastName(person.getLastName());
+				person.setFriends(personz);
+				person.setId(person.getId()); 
+				personz.add(person);
+		
+				return new ResponseEntity<PersonDto>(mapper.toDto(person), HttpStatus.CREATED);
 			
-					return new ResponseEntity<PersonDto>(mapper.toDto(person), HttpStatus.CREATED);
-				}
 			} catch (IndexOutOfBoundsException e) {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
